@@ -1,13 +1,57 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { signOut } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth, db } from '../config/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { getRandomAvatar } from '../config/avatars';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
   const navigate = useNavigate();
   const user = auth.currentUser;
   const [activeSection, setActiveSection] = useState('home');
+  const [userProfile, setUserProfile] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef(null);
+
+  // Fetch or create user profile on component mount
+  useEffect(() => {
+    if (user) {
+      getUserProfile();
+    }
+  }, [user]);
+
+  const getUserProfile = async () => {
+    try {
+      setLoadingProfile(true);
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        // User profile already exists
+        setUserProfile(userDocSnap.data());
+      } else {
+        // First time login - create new user profile
+        const newUserProfile = {
+          email: user.email,
+          profilePictureUrl: getRandomAvatar(),
+          createdAt: new Date().toISOString(),
+          displayName: user.displayName || user.email.split('@')[0],
+        };
+
+        // Create the document in Firestore
+        await setDoc(userDocRef, newUserProfile);
+        setUserProfile(newUserProfile);
+        
+        console.log('✅ New user profile created with fun avatar!');
+      }
+    } catch (error) {
+      console.error('Error fetching/creating user profile:', error);
+    } finally {
+      setLoadingProfile(false);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -26,13 +70,58 @@ const DashboardPage = () => {
     navigate('/reports');
   };
 
+  const handleSettings = () => {
+    navigate('/settings');
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
   return (
     <div className="dashboard-container">
+      {/* Background Music */}
+      <audio 
+        ref={audioRef}
+        autoPlay 
+        loop
+        muted={isMuted}
+      >
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+
+      {/* Music Control Button */}
+      <button 
+        className="music-control-btn"
+        onClick={toggleMute}
+        title={isMuted ? 'Activar música' : 'Silenciar música'}
+      >
+        {isMuted ? '🔇' : '🔈'}
+      </button>
+
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
         <div className="sidebar-header">
-          <h2>SIRH Molino</h2>
-          <p className="user-info">{user?.email}</p>
+          <div className="user-profile-section">
+            {loadingProfile ? (
+              <div className="avatar-skeleton"></div>
+            ) : (
+              <img 
+                src={userProfile?.profilePictureUrl} 
+                alt="Avatar" 
+                className="user-avatar"
+              />
+            )}
+            <div className="user-info-text">
+              <h2>SIRH Molino</h2>
+              <p className="user-info">{userProfile?.displayName || user?.email}</p>
+              <span className="user-email-small">{user?.email}</span>
+            </div>
+          </div>
         </div>
 
         <nav className="sidebar-nav">
@@ -65,7 +154,10 @@ const DashboardPage = () => {
           </button>
           <button
             className={`nav-item ${activeSection === 'settings' ? 'active' : ''}`}
-            onClick={() => setActiveSection('settings')}
+            onClick={() => {
+              setActiveSection('settings');
+              handleSettings();
+            }}
           >
             <span className="nav-icon">⚙️</span>
             Configuración

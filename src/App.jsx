@@ -4,6 +4,7 @@ import DashboardPage from './components/DashboardPage';
 import EmployeeListPage from './components/EmployeeListPage';
 import EmployeeDetailPage from './components/EmployeeDetailPage';
 import ReportsPage from './components/ReportsPage';
+import SettingsPage from './components/SettingsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -41,6 +42,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ReportsPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/settings" 
+          element={
+            <ProtectedRoute>
+              <SettingsPage />
             </ProtectedRoute>
           } 
         />

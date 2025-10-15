@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
+import { getRandomAvatar } from '../config/avatars';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -10,6 +11,9 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  // Generate a random avatar once when component mounts
+  const randomAvatar = useMemo(() => getRandomAvatar(), []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,6 +84,16 @@ const LoginPage = () => {
       <div className="login-box">
         <h1 className="login-title">Iniciar Sesión</h1>
         <p className="login-subtitle">SIRH Molino App</p>
+        
+        {/* Fun welcome avatar */}
+        <div className="login-avatar-container">
+          <img 
+            src={randomAvatar} 
+            alt="Welcome Avatar" 
+            className="login-avatar"
+          />
+          <p className="avatar-welcome-text">¡Bienvenido de vuelta! 👋</p>
+        </div>
         
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
