@@ -1,6 +1,7 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { motion } from 'framer-motion';
 import './ExportControls.css';
 
 /**
@@ -175,23 +176,29 @@ export default function ExportControls({ data = [], type = 'employees', title = 
 
   return (
     <div className="export-controls">
-      <button 
+      <motion.button 
         className="btn-export btn-export-pdf"
         onClick={handleExportPDF}
         disabled={!data || data.length === 0}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <span className="export-icon">📄</span>
         Exportar a PDF
-      </button>
+      </motion.button>
       
-      <button 
+      <motion.button 
         className="btn-export btn-export-excel"
         onClick={handleExportExcel}
         disabled={!data || data.length === 0}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <span className="export-icon">📊</span>
         Exportar a Excel
-      </button>
+      </motion.button>
     </div>
   );
 }

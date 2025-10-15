@@ -3,6 +3,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 import EmployeeModal from './EmployeeModal';
 import LoadingScreen from './LoadingScreen';
 import './EmployeeTable.css';
@@ -133,10 +134,16 @@ const EmployeeTable = ({ searchTerm = '', onFilteredDataChange }) => {
             )}
           </p>
         </div>
-        <button className="btn-add-employee" onClick={handleAddNew}>
+        <motion.button 
+          className="btn-add-employee" 
+          onClick={handleAddNew}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           <span className="btn-icon">+</span>
           Agregar Empleado
-        </button>
+        </motion.button>
       </div>
 
       {error && (
@@ -192,27 +199,33 @@ const EmployeeTable = ({ searchTerm = '', onFilteredDataChange }) => {
                   <td>{getStatusBadge(employee.ESTADO)}</td>
                   <td>
                     <div className="action-buttons">
-                      <button
+                      <motion.button
                         className="btn-action btn-view"
                         onClick={() => handleViewDetails(employee.id)}
                         title="Ver detalles"
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
                       >
                         👁️
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
                         className="btn-action btn-edit"
                         onClick={() => handleEdit(employee)}
                         title="Editar"
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
                       >
                         ✏️
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
                         className="btn-action btn-delete"
                         onClick={() => handleDelete(employee.id)}
                         title="Eliminar"
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
                       >
                         🗑️
-                      </button>
+                      </motion.button>
                     </div>
                   </td>
                 </tr>

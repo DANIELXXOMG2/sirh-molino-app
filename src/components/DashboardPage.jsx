@@ -3,6 +3,7 @@ import { signOut } from 'firebase/auth';
 import { auth, db } from '../config/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { getRandomAvatar } from '../config/avatars';
 import Logo from './Logo';
 import './DashboardPage.css';
@@ -188,69 +189,116 @@ const DashboardPage = () => {
           </div>
         </header>
 
-        <div className="dashboard-content">
+        <motion.div 
+          className="dashboard-content"
+          key={activeSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           {activeSection === 'home' && (
             <div className="home-section">
               <div className="stats-grid">
-                <div className="stat-card">
+                <motion.div 
+                  className="stat-card"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  whileHover={{ y: -5, boxShadow: "0 8px 16px rgba(211, 47, 47, 0.2)" }}
+                >
                   <div className="stat-icon">👥</div>
                   <div className="stat-info">
                     <h3>Empleados</h3>
                     <p className="stat-number">-</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="stat-card">
+                <motion.div 
+                  className="stat-card"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                  whileHover={{ y: -5, boxShadow: "0 8px 16px rgba(211, 47, 47, 0.2)" }}
+                >
                   <div className="stat-icon">📄</div>
                   <div className="stat-info">
                     <h3>Contratos Activos</h3>
                     <p className="stat-number">-</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="stat-card">
+                <motion.div 
+                  className="stat-card"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
+                  whileHover={{ y: -5, boxShadow: "0 8px 16px rgba(211, 47, 47, 0.2)" }}
+                >
                   <div className="stat-icon">✅</div>
                   <div className="stat-info">
                     <h3>Empleados Activos</h3>
                     <p className="stat-number">-</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="stat-card">
+                <motion.div 
+                  className="stat-card"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                  whileHover={{ y: -5, boxShadow: "0 8px 16px rgba(211, 47, 47, 0.2)" }}
+                >
                   <div className="stat-icon">⏸️</div>
                   <div className="stat-info">
                     <h3>Empleados Retirados</h3>
                     <p className="stat-number">-</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               <div className="quick-actions">
                 <h2>Acciones Rápidas</h2>
                 <div className="action-buttons">
-                  <button className="action-btn primary" onClick={handleManageEmployees}>
+                  <motion.button 
+                    className="action-btn primary" 
+                    onClick={handleManageEmployees}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
                     <span className="btn-icon">👥</span>
                     <div className="btn-content">
                       <strong>Gestionar Empleados</strong>
                       <small>Ver, crear y editar empleados</small>
                     </div>
-                  </button>
+                  </motion.button>
 
-                  <button className="action-btn secondary" onClick={handleReports}>
+                  <motion.button 
+                    className="action-btn secondary" 
+                    onClick={handleReports}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
                     <span className="btn-icon">📊</span>
                     <div className="btn-content">
                       <strong>Ver Reportes</strong>
                       <small>Estadísticas y análisis</small>
                     </div>
-                  </button>
+                  </motion.button>
 
-                  <button className="action-btn tertiary">
+                  <motion.button 
+                    className="action-btn tertiary"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
                     <span className="btn-icon">🔔</span>
                     <div className="btn-content">
                       <strong>Notificaciones</strong>
                       <small>Revisar alertas del sistema</small>
                     </div>
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </div>
@@ -269,7 +317,7 @@ const DashboardPage = () => {
               <p>Esta sección estará disponible próximamente.</p>
             </div>
           )}
-        </div>
+        </motion.div>
       </main>
     </div>
   );

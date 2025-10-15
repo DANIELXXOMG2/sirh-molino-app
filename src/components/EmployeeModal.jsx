@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, updateDoc, doc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 import './EmployeeModal.css';
 
 const EmployeeModal = ({ employee, onClose, onSave }) => {
@@ -127,8 +128,21 @@ const EmployeeModal = ({ employee, onClose, onSave }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content">
+    <motion.div 
+      className="modal-overlay" 
+      onClick={handleOverlayClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <motion.div 
+        className="modal-content"
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 20 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      >
         <div className="modal-header">
           <h2>{employee ? 'Editar Empleado' : 'Nuevo Empleado'}</h2>
           <button className="btn-close" onClick={onClose}>×</button>
@@ -293,25 +307,30 @@ const EmployeeModal = ({ employee, onClose, onSave }) => {
           </div>
 
           <div className="modal-footer">
-            <button
+            <motion.button
               type="button"
               className="btn-cancel"
               onClick={onClose}
               disabled={loading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Cancelar
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="submit"
               className="btn-save"
               disabled={loading}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {loading ? 'Guardando...' : employee ? 'Actualizar' : 'Crear'}
-            </button>
+            </motion.button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
