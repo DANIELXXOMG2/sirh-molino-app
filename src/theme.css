@@ -1,0 +1,13 @@
+/* Strawberry Dessert Color Palette */
+:root {
+  --primary-red: #d94a61;
+  --primary-pink: #ff8fab;
+  --accent-cream: #fff0f3;
+  --background-light: #fce4ec;
+  --background-white: #ffffff;
+  --text-dark: #4a2c2c;
+  --text-light: #8d6e63;
+  --border-color: #f8bbd0;
+  --success-green: #66bb6a;
+  --error-red: #f44336;
+}

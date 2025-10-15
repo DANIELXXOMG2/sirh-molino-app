@@ -1,0 +1,63 @@
+.export-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.btn-export:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-export:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-export-pdf {
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-pink) 100%);
+}
+
+.btn-export-pdf:not(:disabled):hover {
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+}
+
+.btn-export-excel {
+  background: linear-gradient(135deg, var(--success-green) 0%, #43a047 100%);
+}
+
+.btn-export-excel:not(:disabled):hover {
+  box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);
+}
+
+.export-icon {
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .export-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-export {
+    width: 100%;
+    justify-content: center;
+  }
+}
