@@ -1,0 +1,45 @@
+.music-control-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-red, #d32f2f) 0%, var(--primary-pink, #ec407a) 100%);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(236, 64, 122, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  animation: pulseMusic 2s infinite;
+}
+
+.music-control-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.6);
+}
+
+.music-control-btn:active {
+  transform: scale(0.95);
+}
+
+.music-control-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(236, 64, 122, 0.3);
+}
+
+@keyframes pulseMusic {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(236, 64, 122, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(236, 64, 122, 0.6);
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import EmployeeTable from './EmployeeTable';
 import ExportControls from './ExportControls';
+import MusicControlButton from './MusicControlButton';
 import { useNavigate } from 'react-router-dom';
 import './EmployeeListPage.css';
 
@@ -11,6 +12,7 @@ const EmployeeListPage = () => {
 
   return (
     <div className="employee-list-page">
+      <MusicControlButton />
       <div className="page-header">
         <button className="btn-back" onClick={() => navigate('/')}>
           ← Volver al Dashboard

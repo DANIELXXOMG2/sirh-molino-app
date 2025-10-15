@@ -5,6 +5,7 @@ import { db } from '../config/firebase';
 import { toast } from 'react-toastify';
 import ContractModal from './ContractModal';
 import ExportControls from './ExportControls';
+import MusicControlButton from './MusicControlButton';
 import './EmployeeDetailPage.css';
 
 const EmployeeDetailPage = () => {
@@ -150,6 +151,7 @@ const EmployeeDetailPage = () => {
 
   return (
     <div className="employee-detail-container">
+      <MusicControlButton />
       {/* Header con botón de volver */}
       <div className="page-header">
         <button className="btn-back" onClick={() => navigate('/employees')}>

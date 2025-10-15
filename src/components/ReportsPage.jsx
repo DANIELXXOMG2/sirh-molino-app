@@ -16,6 +16,7 @@ import {
 } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import LoadingScreen from './LoadingScreen';
+import MusicControlButton from './MusicControlButton';
 import './ReportsPage.css';
 
 // Registrar componentes de Chart.js
@@ -186,6 +187,7 @@ const ReportsPage = () => {
 
   return (
     <div className="reports-page">
+      <MusicControlButton />
       {/* Header */}
       <div className="page-header">
         <button className="btn-back" onClick={() => navigate('/')}>

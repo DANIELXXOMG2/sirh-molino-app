@@ -5,6 +5,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { FUN_AVATARS } from '../config/avatars';
 import LoadingScreen from './LoadingScreen';
+import MusicControlButton from './MusicControlButton';
 import './SettingsPage.css';
 
 const SettingsPage = () => {
@@ -82,6 +83,7 @@ const SettingsPage = () => {
 
   return (
     <div className="settings-page">
+      <MusicControlButton />
       {/* Header */}
       <div className="page-header">
         <button className="btn-back" onClick={() => navigate('/')}>

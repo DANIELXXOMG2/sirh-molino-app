@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../config/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getRandomAvatar } from '../config/avatars';
+import MusicControlButton from './MusicControlButton';
 import Logo from './Logo';
 import './DashboardPage.css';
 
@@ -14,8 +15,6 @@ const DashboardPage = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [userProfile, setUserProfile] = useState(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef(null);
 
   // Fetch or create user profile on component mount
   useEffect(() => {
@@ -76,34 +75,10 @@ const DashboardPage = () => {
     navigate('/settings');
   };
 
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
   return (
     <div className="dashboard-container">
-      {/* Background Music */}
-      <audio 
-        ref={audioRef}
-        autoPlay 
-        loop
-        muted={isMuted}
-      >
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
-        Tu navegador no soporta el elemento de audio.
-      </audio>
-
       {/* Music Control Button */}
-      <button 
-        className="music-control-btn"
-        onClick={toggleMute}
-        title={isMuted ? 'Activar música' : 'Silenciar música'}
-      >
-        {isMuted ? '🔇' : '🔈'}
-      </button>
+      <MusicControlButton />
 
       {/* Sidebar */}
       <aside className="dashboard-sidebar">

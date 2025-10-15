@@ -8,24 +8,26 @@ import EmployeeDetailPage from './components/EmployeeDetailPage';
 import ReportsPage from './components/ReportsPage';
 import SettingsPage from './components/SettingsPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import { MusicProvider } from './contexts/MusicContext';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <Routes>
+      <MusicProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route 
           path="/" 
@@ -68,6 +70,7 @@ function App() {
           } 
         />
       </Routes>
+      </MusicProvider>
     </Router>
   );
 }
