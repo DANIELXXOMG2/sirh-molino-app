@@ -4,6 +4,7 @@ import { auth, db } from '../config/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { getRandomAvatar } from '../config/avatars';
+import Logo from './Logo';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
@@ -105,6 +106,11 @@ const DashboardPage = () => {
 
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
+        {/* Logo at top of sidebar */}
+        <div className="sidebar-logo">
+          <Logo size="small" variant="light" showText={false} />
+        </div>
+
         <div className="sidebar-header">
           <div className="user-profile-section">
             {loadingProfile ? (
@@ -117,7 +123,6 @@ const DashboardPage = () => {
               />
             )}
             <div className="user-info-text">
-              <h2>SIRH Molino</h2>
               <p className="user-info">{userProfile?.displayName || user?.email}</p>
               <span className="user-email-small">{user?.email}</span>
             </div>
@@ -177,7 +182,9 @@ const DashboardPage = () => {
         <header className="dashboard-header">
           <h1>Dashboard</h1>
           <div className="header-actions">
-            <span className="welcome-text">Bienvenido al Sistema</span>
+            <span className="welcome-text">
+              👋 Bienvenido de nuevo, <strong>{userProfile?.displayName || user?.email?.split('@')[0] || 'Usuario'}</strong>
+            </span>
           </div>
         </header>
 

@@ -15,6 +15,7 @@ import {
   LineElement
 } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import LoadingScreen from './LoadingScreen';
 import './ReportsPage.css';
 
 // Registrar componentes de Chart.js
@@ -178,10 +179,7 @@ const ReportsPage = () => {
   if (loading) {
     return (
       <div className="reports-page">
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Cargando reportes...</p>
-        </div>
+        <LoadingScreen message="Cargando reportes..." />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { collection, addDoc, updateDoc, doc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { toast } from 'react-toastify';
 import './EmployeeModal.css';
 
 const EmployeeModal = ({ employee, onClose, onSave }) => {
@@ -102,12 +103,12 @@ const EmployeeModal = ({ employee, onClose, onSave }) => {
         // Actualizar empleado existente
         const employeeRef = doc(db, 'employees', employee.id);
         await updateDoc(employeeRef, dataToSave);
-        alert('Empleado actualizado exitosamente');
+        toast.success('✅ Empleado actualizado exitosamente');
       } else {
         // Crear nuevo empleado
         dataToSave.createdAt = new Date().toISOString();
         await addDoc(collection(db, 'employees'), dataToSave);
-        alert('Empleado creado exitosamente');
+        toast.success('✅ Empleado creado exitosamente');
       }
 
       onSave();

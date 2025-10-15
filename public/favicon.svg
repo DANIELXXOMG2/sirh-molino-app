@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Rice Mill Building Base -->
+  <rect x="60" y="100" width="80" height="80" fill="#D32F2F" stroke="#A52020" stroke-width="3"/>
+  
+  <!-- Building Windows -->
+  <rect x="75" y="120" width="15" height="20" fill="#FFCDD2"/>
+  <rect x="110" y="120" width="15" height="20" fill="#FFCDD2"/>
+  <rect x="75" y="150" width="15" height="20" fill="#FFCDD2"/>
+  <rect x="110" y="150" width="15" height="20" fill="#FFCDD2"/>
+  
+  <!-- Door -->
+  <rect x="92" y="155" width="16" height="25" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Roof -->
+  <path d="M 50 100 L 100 70 L 150 100 Z" fill="#A52020" stroke="#8B1515" stroke-width="3"/>
+  
+  <!-- Chimney -->
+  <rect x="120" y="75" width="15" height="25" fill="#5D4037" stroke="#3E2723" stroke-width="2"/>
+  <rect x="117" y="72" width="21" height="5" fill="#6D4C41"/>
+  
+  <!-- Smoke -->
+  <circle cx="127" cy="60" r="5" fill="#999" opacity="0.6"/>
+  <circle cx="132" cy="55" r="6" fill="#AAA" opacity="0.5"/>
+  <circle cx="125" cy="52" r="4" fill="#888" opacity="0.6"/>
+  
+  <!-- Rice Grain Icon (left side) -->
+  <ellipse cx="30" cy="100" rx="6" ry="12" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  <ellipse cx="25" cy="115" rx="5" ry="10" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  <ellipse cx="35" cy="115" rx="5" ry="10" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  
+  <!-- Rice Grain Icon (right side) -->
+  <ellipse cx="170" cy="100" rx="6" ry="12" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  <ellipse cx="165" cy="115" rx="5" ry="10" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  <ellipse cx="175" cy="115" rx="5" ry="10" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+  
+  <!-- Gear/Mill Wheel -->
+  <circle cx="100" cy="130" r="12" fill="#EC407A" stroke="#D81B60" stroke-width="2"/>
+  <circle cx="100" cy="130" r="6" fill="#FFCDD2"/>
+  <line x1="100" y1="118" x2="100" y2="142" stroke="#D81B60" stroke-width="2"/>
+  <line x1="88" y1="130" x2="112" y2="130" stroke="#D81B60" stroke-width="2"/>
+  <line x1="91.5" y1="121.5" x2="108.5" y2="138.5" stroke="#D81B60" stroke-width="2"/>
+  <line x1="91.5" y1="138.5" x2="108.5" y2="121.5" stroke="#D81B60" stroke-width="2"/>
+</svg>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { toast } from 'react-toastify';
 import ContractModal from './ContractModal';
 import ExportControls from './ExportControls';
 import './EmployeeDetailPage.css';
@@ -82,10 +83,10 @@ const EmployeeDetailPage = () => {
     try {
       await deleteDoc(doc(db, 'employees', employeeId, 'contracts', contractId));
       setContracts(contracts.filter(c => c.id !== contractId));
-      alert('Contrato eliminado exitosamente');
+      toast.success('🗑️ Contrato eliminado exitosamente');
     } catch (err) {
       console.error('Error al eliminar contrato:', err);
-      alert('Error al eliminar el contrato');
+      toast.error('❌ Error al eliminar el contrato');
     }
   };
 

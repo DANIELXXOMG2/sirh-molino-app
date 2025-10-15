@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { toast } from 'react-toastify';
 import './ContractModal.css';
 
 const ContractModal = ({ employeeId, contract, onClose, onSave }) => {
@@ -81,12 +82,12 @@ const ContractModal = ({ employeeId, contract, onClose, onSave }) => {
         // Actualizar contrato existente
         const contractRef = doc(db, 'employees', employeeId, 'contracts', contract.id);
         await updateDoc(contractRef, dataToSave);
-        alert('Contrato actualizado exitosamente');
+        toast.success('✅ Contrato actualizado exitosamente');
       } else {
         // Crear nuevo contrato
         dataToSave.createdAt = new Date().toISOString();
         await addDoc(contractsRef, dataToSave);
-        alert('Contrato creado exitosamente');
+        toast.success('✅ Contrato creado exitosamente');
       }
 
       onSave();

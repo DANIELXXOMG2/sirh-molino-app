@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../config/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 import { FUN_AVATARS } from '../config/avatars';
+import LoadingScreen from './LoadingScreen';
 import './SettingsPage.css';
 
 const SettingsPage = () => {
@@ -59,11 +61,12 @@ const SettingsPage = () => {
       // Show success message
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
+      toast.success('✨ Avatar actualizado exitosamente');
 
       console.log('✅ Avatar updated successfully!');
     } catch (error) {
       console.error('Error updating avatar:', error);
-      alert('Error al actualizar el avatar. Por favor, intenta de nuevo.');
+      toast.error('❌ Error al actualizar el avatar. Por favor, intenta de nuevo.');
     } finally {
       setSaving(false);
     }
@@ -72,10 +75,7 @@ const SettingsPage = () => {
   if (loading) {
     return (
       <div className="settings-page">
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Cargando configuración...</p>
-        </div>
+        <LoadingScreen message="Cargando configuración..." />
       </div>
     );
   }

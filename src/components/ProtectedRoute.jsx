@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import LoadingScreen from './LoadingScreen';
 
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -20,18 +21,7 @@ const ProtectedRoute = ({ children }) => {
 
   // Mostrar un indicador de carga mientras se verifica la autenticación
   if (loading) {
-    return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        fontSize: '18px',
-        color: '#667eea'
-      }}>
-        <div>Cargando...</div>
-      </div>
-    );
+    return <LoadingScreen fullScreen={true} message="Verificando autenticación..." />;
   }
 
   // Si el usuario está autenticado, mostrar el contenido protegido

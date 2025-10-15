@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import EmployeeModal from './EmployeeModal';
+import LoadingScreen from './LoadingScreen';
 import './EmployeeTable.css';
 
 const EmployeeTable = ({ searchTerm = '', onFilteredDataChange }) => {
@@ -71,10 +73,10 @@ const EmployeeTable = ({ searchTerm = '', onFilteredDataChange }) => {
     try {
       await deleteDoc(doc(db, 'employees', employeeId));
       setEmployees(employees.filter(emp => emp.id !== employeeId));
-      alert('Empleado eliminado exitosamente');
+      toast.success('🗑️ Empleado eliminado exitosamente');
     } catch (err) {
       console.error('Error al eliminar empleado:', err);
-      alert('Error al eliminar el empleado. Por favor, intenta de nuevo.');
+      toast.error('❌ Error al eliminar el empleado. Por favor, intenta de nuevo.');
     }
   };
 
@@ -109,10 +111,7 @@ const EmployeeTable = ({ searchTerm = '', onFilteredDataChange }) => {
   if (loading) {
     return (
       <div className="employee-table-container">
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Cargando empleados...</p>
-        </div>
+        <LoadingScreen message="Cargando empleados..." />
       </div>
     );
   }

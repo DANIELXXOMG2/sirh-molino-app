@@ -3,6 +3,8 @@ import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/aut
 import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { getRandomAvatar } from '../config/avatars';
+import { toast } from 'react-toastify';
+import Logo from './Logo';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -62,7 +64,7 @@ const LoginPage = () => {
 
     try {
       await sendPasswordResetEmail(auth, resetEmail);
-      alert('Se ha enviado un correo electrónico para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada.');
+      toast.success('Se ha enviado un correo electrónico para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada.');
     } catch (err) {
       switch (err.code) {
         case 'auth/invalid-email':
@@ -82,8 +84,13 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-box">
+        {/* Logo */}
+        <div className="login-logo-wrapper">
+          <Logo size="large" variant="dark" />
+        </div>
+        
         <h1 className="login-title">Iniciar Sesión</h1>
-        <p className="login-subtitle">SIRH Molino App</p>
+        <p className="login-subtitle">Sistema de Recursos Humanos</p>
         
         {/* Fun welcome avatar */}
         <div className="login-avatar-container">

@@ -1,0 +1,87 @@
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Logo Icon */
+.logo-icon {
+  display: block;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover .logo-icon {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Logo Text */
+.logo-text {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+/* Size Variants */
+.logo-small .logo-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.logo-small .logo-text {
+  font-size: 14px;
+}
+
+.logo-medium .logo-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.logo-medium .logo-text {
+  font-size: 20px;
+}
+
+.logo-large .logo-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.logo-large .logo-text {
+  font-size: 32px;
+}
+
+/* Color Variants */
+.logo-default .logo-text {
+  color: var(--text-dark);
+}
+
+.logo-light .logo-text {
+  color: white;
+}
+
+.logo-dark .logo-text {
+  color: var(--text-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-medium .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-medium .logo-text {
+    font-size: 18px;
+  }
+
+  .logo-large .logo-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-large .logo-text {
+    font-size: 24px;
+  }
+}
